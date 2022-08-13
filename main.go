@@ -1,4 +1,4 @@
-package main
+package bhp
 
 import (
 	"errors"
@@ -11,27 +11,9 @@ import (
 	"runtime/debug"
 
 	"github.com/Masterminds/sprig"
-	"github.com/spf13/cobra"
 )
 
-func main() {
-	var rootCmd = &cobra.Command{
-		Use:   "bhp <dir>",
-		Short: "Admit it, this is better than React.",
-		Run: func(cmd *cobra.Command, args []string) {
-			if len(args) < 1 {
-				fmt.Println("You must specify a source directory to pull contents from.")
-				os.Exit(1)
-			}
-
-			run(args[0])
-		},
-	}
-
-	rootCmd.Execute()
-}
-
-func run(dir string) {
+func Run(dir string) {
 	Must0(os.Chdir(dir))
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
